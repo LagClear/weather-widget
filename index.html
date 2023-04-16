@@ -1,33 +1,73 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Weather and Time Widget made by Adam/Hellshowers</title>
-    <style>
-      #current-time {
-        font-family: Arial Black;
-        font-size: 16px;
-        color: white;
-        margin-top: -5px;
-        text-align: center;
-      }
-    </style>
-  </head>
-  <body>
-    <div style="width: 110px; height: 160px;">
-      <a class="weatherwidget-io" href="https://forecast7.com/en/34d05n118d24/los-angeles/?unit=us" data-font="Arial Black" data-icons="Climacons Animated" data-mode="Current" data-theme="original" data-basecolor="rgba(112, 102, 144, 0)" data-mooncolor="#dcdb38">Los Angeles, CA, USA</a>
-      <p id="current-time"></p>
-    </div>
-    <script>
-      fetch('https://worldtimeapi.org/api/timezone/America/Los_Angeles')
-        .then(response => response.json())
-        .then(data => {
-          const currentTime = new Date(data.datetime);
-          const options = { hour: 'numeric', minute: 'numeric', hour12: true };
-          document.getElementById('current-time').textContent = currentTime.toLocaleString('en-US', options);
-        });
+<head>
+	<meta charset="UTF-8">
+	<title>Weather and Time Widget</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: Arial, sans-serif;
+			background-color: #f2f2f2;
+		}
+		
+		.widget-container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 160px;
+			width: 110px;
+			background-color: #fff;
+			box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+			border-radius: 5px;
+			margin: auto;
+			margin-top: 50px;
+		}
+		
+		.weatherwidget-io {
+			display: block;
+			margin: 10px;
+			font-family: "Arial Black", Arial, sans-serif;
+			color: #000;
+			text-decoration: none;
+		}
+		
+		#current-time {
+			font-size: 16px;
+			font-family: "Arial Black", Arial, sans-serif;
+			color: #fff;
+			text-align: center;
+			margin-top: 5px;
+		}
+	</style>
+</head>
+<body>
+	<div class="widget-container">
+		<a class="weatherwidget-io" href="https://forecast7.com/en/34d05n118d24/los-angeles/?unit=us" data-font="Arial Black" data-icons="Climacons Animated" data-mode="Current" data-theme="original" data-basecolor="rgba(112, 102, 144, 0)" data-mooncolor="#dcdb38" >Los Angeles, CA, USA</a>
+		<p id="current-time"></p>
+	</div>
 
-      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
-    </script>
-  </body>
+	<script>
+		fetch('https://worldtimeapi.org/api/timezone/America/Los_Angeles')
+			.then(response => response.json())
+			.then(data => {
+				const currentTime = new Date(data.datetime);
+				const options = { hour: 'numeric', minute: 'numeric', hour12: true };
+				document.getElementById('current-time').textContent = currentTime.toLocaleString('en-US', options);
+			});
+	</script>
+
+	<script>
+		!function(d,s,id){
+			var js,fjs=d.getElementsByTagName(s)[0];
+			if(!d.getElementById(id)){
+				js=d.createElement(s);
+				js.id=id;
+				js.src='https://weatherwidget.io/js/widget.min.js';
+				fjs.parentNode.insertBefore(js,fjs);
+			}
+		}(document,'script','weatherwidget-io-js');
+	</script>
+</body>
 </html>
